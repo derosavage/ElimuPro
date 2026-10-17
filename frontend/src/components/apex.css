@@ -8,6 +8,9 @@
   height: min(560px, calc(100vh - 6rem)); display: flex; flex-direction: column; background: var(--surface-raised-solid);
   border: 1px solid var(--border); border-radius: 14px; box-shadow: var(--shadow); color: var(--text); overflow: hidden; }
 .apex-head { display: flex; align-items: center; justify-content: space-between; padding: .75rem 1rem; border-bottom: 1px solid var(--border); }
+.apex-title { display: flex; align-items: center; gap: .6rem; }
+.apex-mark { width: 36px; height: 36px; border-radius: 8px; }
+.apex-logo { align-self: center; width: 160px; max-width: 70%; border-radius: 12px; border: 1px solid var(--border); margin-bottom: .25rem; }
 .apex-head small { display: block; color: var(--muted); font-size: .78rem; }
 .apex-close { background: none; border: 0; color: var(--muted); font-size: 1.6rem; line-height: 1; min-width: 44px; min-height: 44px; cursor: pointer; }
 .apex-close:hover { color: var(--text); }

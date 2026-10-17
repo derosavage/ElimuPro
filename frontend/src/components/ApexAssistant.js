@@ -10,6 +10,11 @@ const ROUTE_COMPONENT = [
   [/results|classes/i, 'academic_analytics'], [/career/i, 'careergps'],
 ];
 const FALLBACK = [{ id: 'general', name: 'ElimuPro (general)' }];
+// Components with their own brand mark show it in the chat.
+const PUBLIC = process.env.PUBLIC_URL || '';
+const BRANDS = {
+  careergps: { mark: `${PUBLIC}/careergps-mark.png`, logo: `${PUBLIC}/careergps-logo.png`, alt: 'CareerGPS by ElimuPro' },
+};
 
 const guessComponent = (path) => (ROUTE_COMPONENT.find(([re]) => re.test(path)) || [null, 'general'])[1];
 
@@ -32,6 +37,7 @@ export default function ApexAssistant() {
 
   const messages = threads[component] || [];
   const current = components.find((c) => c.id === component) || FALLBACK[0];
+  const brand = BRANDS[component];
 
   useEffect(() => { logRef.current?.scrollTo(0, logRef.current.scrollHeight); }, [messages.length, sending]);
 
@@ -61,7 +67,10 @@ export default function ApexAssistant() {
   return (
     <section className="apex-panel" role="dialog" aria-label="Apex AI customer care">
       <header className="apex-head">
-        <div><strong>Apex AI</strong><small>Customer care</small></div>
+        <div className="apex-title">
+          {brand && <img className="apex-mark" src={brand.mark} alt="" />}
+          <div><strong>Apex AI</strong><small>{brand ? `${current.name} customer care` : 'Customer care'}</small></div>
+        </div>
         <button className="apex-close" onClick={() => setOpen(false)} aria-label="Close Apex AI">×</button>
       </header>
       <label className="apex-topic">
@@ -71,6 +80,7 @@ export default function ApexAssistant() {
         </select>
       </label>
       <div className="apex-log" ref={logRef} aria-live="polite">
+        {messages.length === 0 && brand && <img className="apex-logo" src={brand.logo} alt={brand.alt} />}
         {messages.length === 0 && (
           <p className="apex-msg assistant">Hi! I'm Apex AI. Ask me anything about {current.name}: pricing, how it works, or where to get help.</p>
         )}
