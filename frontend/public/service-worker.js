@@ -2,7 +2,7 @@
    - App shell + static assets: cache-first (so the app opens offline)
    - Page navigations: network-first, falling back to the cached shell
    - /api requests are NEVER cached: school data must always be live and private. */
-const CACHE = "elimupro-shell-v2";
+const CACHE = "elimupro-shell-v1";
 const SHELL = ["/", "/manifest.json", "/icon-192.png", "/icon-512.png"];
 
 self.addEventListener("install", (e) => {
